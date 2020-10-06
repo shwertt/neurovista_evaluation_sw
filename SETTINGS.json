@@ -1,0 +1,10 @@
+{
+"run_on_contest_data": 1,
+"mode": 1,
+"pat": "1-3",
+"subtract_mean": 0 ,
+"model": "./trains",
+"feat": "./features",
+"CSV": "./CSV",
+"solutions": "./solutions"
+}

@@ -84,7 +84,7 @@ def model1d(n_kernels=128):
     return model
 
 
-# von tf2_matthias/models/iic_resnet_backbone.py
+# adapted from tf2_matthias/models/iic_resnet_backbone.py
 def resnet1d(n_kernels=32):
     kernel_size = 5
 
@@ -94,13 +94,14 @@ def resnet1d(n_kernels=32):
         out = tf.keras.layers.Conv1D(kernels, size, padding='same')(out)
         out = tf.keras.layers.add([X, out])
         out = tf.keras.layers.ReLU()(out)
-        out = tf.keras.layers.MaxPool1D(pool_size=5, strides=3)(out)  # ORIG
+        out = tf.keras.layers.MaxPool1D(pool_size=5, strides=3)(out)
         return out
 
     # see here: https://www.tensorflow.org/guide/distributed_training
-    # NOTE: Nutze tf2 Umgebung und betrachte Fehler mit export TF_CPP_MIN_LOG_LEVEL='0' && python3 run.py
-    strategy = tf.distribute.MirroredStrategy(devices=None)  # on all available GPUs  # fkt! # wähle aus, welche GPUs verwendet werden können mit zB export CUDA_VISIBLE_DEVICES=0,1,2,3,4 - nutzt dann alle, die verfügbar sind
-    # strategy = tf.distribute.get_strategy()  # default strategy == no strategy  # fkt
+    # NOTE: Use tf2 virtual environment locally.
+    # For debugging one can see a verbose run with export TF_CPP_MIN_LOG_LEVEL='0' && python3 run.py
+    strategy = tf.distribute.MirroredStrategy(devices=None)  # on all available GPUs  # works! # choose which GPUs shall be chosen with i.e.  export CUDA_VISIBLE_DEVICES=0,1,2,3,4 - uses then all five available GPUs
+    # strategy = tf.distribute.get_strategy()  # default strategy == no strategy  # works
 
     with strategy.scope():
         loss = tf.keras.losses.binary_crossentropy
@@ -151,9 +152,10 @@ def resnet1d_v20201002(n_kernels=16):
         return out
 
     # see here: https://www.tensorflow.org/guide/distributed_training
-    # NOTE: Nutze tf2 Umgebung und betrachte Fehler mit export TF_CPP_MIN_LOG_LEVEL='0' && python3 run.py
-    strategy = tf.distribute.MirroredStrategy(devices=None)  # on all available GPUs  # fkt! # wähle aus, welche GPUs verwendet werden können mit zB export CUDA_VISIBLE_DEVICES=0,1,2,3,4 - nutzt dann alle, die verfügbar sind
-    # strategy = tf.distribute.get_strategy()  # default strategy == no strategy  # fkt
+    # NOTE: Use tf2 virtual environment locally.
+    # For debugging one can see a verbose run with export TF_CPP_MIN_LOG_LEVEL='0' && python3 run.py
+    strategy = tf.distribute.MirroredStrategy(devices=None)  # on all available GPUs  # works! # choose which GPUs shall be chosen with i.e.  export CUDA_VISIBLE_DEVICES=0,1,2,3,4 - uses then all five available GPUs
+    # strategy = tf.distribute.get_strategy()  # default strategy == no strategy  # works
 
     with strategy.scope():
         loss = tf.keras.losses.binary_crossentropy

@@ -91,7 +91,7 @@ def training(args):
                   use_multiprocessing=False,
                   verbose=2,
                   workers=1,
-                  epochs=50)  # ORIGINAL
+                  epochs=1)  # ORIGINAL
         print('training patient {} done'.format(patient))
         Path(args.model).mkdir(exist_ok=True)
         if USE_DATE:

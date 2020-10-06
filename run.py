@@ -16,8 +16,7 @@ def main():
 
     if args.run_on_contest_data:
         args.subtract_mean = 1
-        # args.pat = '1-3'  # TODO HERE muss wieder rein für echte Auswertung
-        # und hochladen, so ist es gewünscht
+        args.pat = '1-3'  # TODO comment out if just one patient shall be examined
 
     print(args)
 

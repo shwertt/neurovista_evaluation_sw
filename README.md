@@ -35,27 +35,25 @@ instructions from https://doc.zih.tu-dresden.de/hpc-wiki/bin/view/Compendium/Con
 
 This involved:
 
-. Check if go is installed by executing `go version`. If it is not:
+1. Check if go is installed by executing `go version`. If it is not installed, get it with:
 
     wget https://storage.googleapis.com/golang/getgo/installer_linux && chmod +x installer_linux && ./installer_linux && source $HOME/.bash_profile
 
-. Follow the instructions to install Singularity
-
-Clone the repo
+2. Install Singularity by cloning the singularity repo
 
     mkdir -p ${GOPATH}/src/github.com/sylabs && cd ${GOPATH}/src/github.com/sylabs && git clone https://github.com/sylabs/singularity.git && cd singularity
 
-. Checkout the version you want (see the Github Releases page for available releases), e.g.
+3. Checkout the singularity version you want (see the Github Releases page for available releases), e.g.
 
     git checkout v3.6.3
 
-. Changing the environment variables for `go` in `~/.bash_profile`
+4. Check the environment variables for `go` in `~/.bash_profile`
 
 I had to change all references from `/home/s9759051` to `/mnt/ieecad/s9759051`
 otherwise the installer could not find the correct environment for the needed
 modules.
 
-. Build and install
+5. Build and install
 
     cd ${GOPATH}/src/github.com/sylabs/singularity && ./mconfig && cd ./builddir && make && sudo make install
 
@@ -70,16 +68,16 @@ Set `mode=1` in `SETTINGS.json`, then start a shell in the container with:
 
     singularity shell --contain -B /PATH/TO/CLONE/OF/THIS/GITHUB/PROJECT/neurovista_evaluation_sw:$HOME -B /scratch:/scratch --nv nv_eval_shwertt.sif
 
-This mounts this github project to the Home folder inside singularity and
+This mounts this github project to the `Home` folder inside singularity and
 binds the local scratch folder to the scratch folder inside singularity. If
-the data files are not inside /scratch, please modify this bind statement.
+the data files are not inside `/scratch`, please modify this bind statement.
 CUDA support and access to the GPU is achieved with the `--nv` flag.
 
 Now while inside the Singularity container, execute:
 
     export CUDA_VISIBLE_DEVICES=0 && python3 run.py
 
-Please specify your CUDA_VISIBLE_DEVICES according to the available resources
+Please specify your `CUDA_VISIBLE_DEVICES` according to the available resources
 of the supercomputer.
 
 After training is complete, you can test the model by closing the container

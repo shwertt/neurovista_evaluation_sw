@@ -37,25 +37,25 @@ This involved:
 
 1. Check if go is installed by executing `go version`. If it is not installed, get it with:
 
-    wget https://storage.googleapis.com/golang/getgo/installer_linux && chmod +x installer_linux && ./installer_linux && source $HOME/.bash_profile
+    `wget https://storage.googleapis.com/golang/getgo/installer_linux && chmod +x installer_linux && ./installer_linux && source $HOME/.bash_profile`
 
 2. Install Singularity by cloning the singularity repo
 
-    mkdir -p ${GOPATH}/src/github.com/sylabs && cd ${GOPATH}/src/github.com/sylabs && git clone https://github.com/sylabs/singularity.git && cd singularity
+    `mkdir -p ${GOPATH}/src/github.com/sylabs && cd ${GOPATH}/src/github.com/sylabs && git clone https://github.com/sylabs/singularity.git && cd singularity`
 
 3. Checkout the singularity version you want (see the Github Releases page for available releases), e.g.
 
-    git checkout v3.6.3
+    `git checkout v3.6.3`
 
 4. Check the environment variables for `go` in `~/.bash_profile`
 
-I had to change all references from `/home/s9759051` to `/mnt/ieecad/s9759051`
-otherwise the installer could not find the correct environment for the needed
-modules.
+    I had to change all references from `/home/s9759051` to `/mnt/ieecad/s9759051`
+    otherwise the installer could not find the correct environment for the needed
+    modules.
 
 5. Build and install
 
-    cd ${GOPATH}/src/github.com/sylabs/singularity && ./mconfig && cd ./builddir && make && sudo make install
+    `cd ${GOPATH}/src/github.com/sylabs/singularity && ./mconfig && cd ./builddir && make && sudo make install`
 
 
 ## Interacting with the Singularity container
